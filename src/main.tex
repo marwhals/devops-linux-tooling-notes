@@ -1,0 +1,113 @@
+%! Author = Marjan
+%! Date = 02/02/2025
+% Preamble
+\documentclass[a4paper, 11pt]{book}
+
+% Packages
+\usepackage{amsmath}    % For math symbols and equations
+\usepackage{graphicx}   % For including graphics
+\usepackage{geometry}   % For adjusting page layout
+\usepackage{fancyhdr}   % For custom headers/footers
+\usepackage{hyperref}   % For hyperlinks
+\usepackage{listings}   % For code listing
+\usepackage{lipsum}     % For placeholder text (to test layout)
+\usepackage{helvet} % Helvetica as a sans-serif font alternative\usepackage{xcolor}
+
+\renewcommand{\rmdefault}{phv} % Set the default font family to Helvetica
+
+% Set page margins (A4 paper)
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+% Set up the header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Linux and Tooling notes}
+\fancyhead[C]{Your Name}
+\fancyhead[R]{\thepage}
+
+% Document
+\begin{document}
+    % Title Page
+    \begin{titlepage}
+        \centering
+        \vspace*{2in}
+        \Huge \textbf{Linux and Tooling Notes}
+        \vfill
+        \Large -----
+        \vfill
+        \Large Date:% \today
+    \end{titlepage}
+
+    \newpage
+
+% Table of Contents
+    \tableofcontents
+    \newpage
+
+%\part{Linux}
+
+
+    \chapter{Linux}
+
+    \section{Useful programs}
+
+    \section{Notes about the file structure}
+
+    \section{Bash}
+    Reminders on Bash related things
+
+    \subsection{Bash CLI}
+    Useful commands here
+
+    \subsection{Bash Scripting}
+    Hmmmmmm useful stuff for scripting
+
+    \section{Hardening a Linux box}
+    Hardening a linux box
+
+%\part{The rest}
+    \chapter{CI/CD stuff}
+
+    \section{Git}
+
+Niche git commands
+    \section{Docker}
+    \section{Docker commands}
+    \subsubsection{Docker compose}
+
+    \section{Jenkins}
+
+    \section{Kubernetes}
+
+    \section{Ansible}
+Ansible for now. Need to consider chef and puppet
+    \section{Terraform}
+    Cloud stuff here
+
+    \chapter{JVM Specific / Delete and or separate}
+    \section{Maven}
+    Maven stuff or keep separated
+    \section{JVM details}
+    Maybe include some low level JVM stuff here....or keep separate
+    \chapter{Hmm maybe more, maybe delete}
+Other tools that can be used via a shell
+
+
+    \paragraph{Code Example}
+
+    \section{Code Example}
+    \begin{lstlisting}[language=Java, caption=Java Code for a Simple Cache]
+public class SimpleCache {
+    private Map<String, String> cache = new HashMap<>();
+
+    public String get(String key) {
+        return cache.get(key);
+    }
+
+    public void put(String key, String value) {
+        cache.put(key, value);
+    }
+}
+    \end{lstlisting}
+
+\end{document}

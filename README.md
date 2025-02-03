@@ -1,0 +1,1 @@
+A personal set of notes for me to reference if need to. Primary focus will be tools that make my development easier for now.
