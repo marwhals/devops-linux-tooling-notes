@@ -43,20 +43,37 @@
     \tableofcontents
     \newpage
 
-%\part{Linux}
-
-
     \chapter{Linux}
+    Notes on Linux, focus on the stuff beyond the basics.
+
+    Everything is a file......
+
+    \paragraph{What is a cgroup}
+
+
+    \paragraph{Linux Processes - Ochestration of system operations}
+    .........?
+    \paragraph{Package managers}
+    ....meh
+    \paragraph{System boot process and systemd}
+    \paragraph{Linux processes}
+    \paragraph{Volumes partitions and mounts} - Managing file systems
+    \paragraph{Logical volume manager}
+    \paragraph{SSH}
+    hmmmmmmm..........
+    \paragraph{Firewalls, controlling network traffic}
+
 
 
     \section{Useful programs}
+    systemmd
+    systemctl - status --- show processes on the linux system
 
 
     \section{Notes about the file structure}
 
-
     \section{Bash}
-    Reminders on Bash related things
+    Reminders on Bash related things.......beyond standard programming constructs....
 
     \subsection{Bash CLI}
     Useful commands here
@@ -64,9 +81,10 @@
     \subsection{Bash Scripting}
     Hmmmmmm useful stuff for scripting
 
-
     \section{Hardening a Linux box}
+    \subsection{Generally}
     Hardening a linux box
+    \subsection{SELinux}
 
 %\part{The rest}
 
@@ -146,6 +164,56 @@
 
 
     \section{Jenkins}
+    \subsection{Manually using Jenkins}
+    Hmmmm......
+
+    Declarative pipeline vs Scripted Pipeline
+
+    \subsection{Jenkins DSL}
+    Create jobs using code.
+    Requires Jenkins DSL plugin and the Groovy programming language.
+    \paragraph{Seed Jobs}
+    The jobs that creates all the other jobs on the server.
+
+    \subsection{Jenkinsfiles}
+    \paragraph{Pipeline}
+    The workflow that is executed when going through the CI/CD process (or any other process).
+    Jenkins as code a.k.a pipeline as code. Requires plugin to be installed
+
+\begin{lstlisting}[caption=Jenkinsfile for a CI/CD Pipeline]
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...' // Print message
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to production...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+\end{lstlisting}
 
 
     \section{Kubernetes}
