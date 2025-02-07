@@ -12,6 +12,7 @@
 \usepackage{listings}   % For code listing
 \usepackage{lipsum}     % For placeholder text (to test layout)
 \usepackage{helvet} % Helvetica as a sans-serif font alternative\usepackage{xcolor}
+\usepackage{enumitem} %Allow for lists
 
 \renewcommand{\rmdefault}{phv} % Set the default font family to Helvetica
 
@@ -38,8 +39,6 @@
         \Large Date:% \today
     \end{titlepage}
 
-    \newpage
-
 % Table of Contents
     \tableofcontents
     \newpage
@@ -49,9 +48,12 @@
 
     \chapter{Linux}
 
+
     \section{Useful programs}
 
+
     \section{Notes about the file structure}
+
 
     \section{Bash}
     Reminders on Bash related things
@@ -62,38 +64,117 @@
     \subsection{Bash Scripting}
     Hmmmmmm useful stuff for scripting
 
+
     \section{Hardening a Linux box}
     Hardening a linux box
 
 %\part{The rest}
+
+
     \chapter{CI/CD stuff}
+
 
     \section{Git}
 
-Niche git commands
+    Niche git commands
+
+
     \section{Docker}
+
+    \paragraph{Motivations}
+    Solves the problem of setting up environments for applications.
+
+    \paragraph{Operating Systems, Hardware and the Kernel}
+    Note: Some of these features are Linux specific......
+    Note: Docker is a Linux virtual machine, inside this Linux VM is where the containers are running.
+    This VM uses the Linux kernel, and it will be doing \textit{Linux} kernel things.
+
+    Understanding what a Kernel is.
+    Software process that acts as the middle guy between programs running on a computer and hardware resources.
+    Programs interact with the kernel through system calls.
+    Kernel exposes different system calls.
+    Namespaces..segment hardware resources to different processes, control groups are another term, limit the CPU, RAM etc that a program can use.
+
+    Namespacing (Linux specific) - Isolating resources per process (or group of processes) - Processes, Hard Drive, Network, Users, Hostnames, Inter Process Communication
+
+    Control groups - Limit amount of processes used per process ---- Memory, CPU, HD I/O, Network Bandwith
+
+    Container - a process or set or processes that have a grouping of resources specifically assigned to it
+
+    Image - A file system snapshot of a very specific set of directories and files.
+    Will also contain a specific startup command.
+
+    Kernel will isolate a section of the hardrive/physical resource and make it avaiable only to this container.
+    This container has access to this very specifc segment of the physical resources.
+
+
+    \paragraph{Terminology}
+    Docker is an overloaded term.
+    Could be referring to Docker client, docker server, docker hub or docker compose.
+    The goal of these tools is to create and run containers.
+
+    \paragraph{Image}
+    Single file with all the deps and config required to run a program.
+    Containers are an instance of a program.
+
+    \paragraph{Container}
+    A program with its own isolated set of hardware resources. Consider kernel.
+
+    \paragraph{Docker Client}
+    Tool commands are issued to
+
+    \paragraph{Docker Server}
+    Tool that handles the docker related tasks such as creating images, running containers etc.
+    Docker will check if a local image exists before downloading one from a central repository.
+
+
+    \textbf{The Docker Ecosystem}
+
+    \begin{itemize}[label=-]
+        \item Docker Client - The CLI that interacts with the server
+        \item Docker Server/Daemon - Background Server running on a machine
+        \item Docker Machine - Used to manage docker environments
+        \item Docker Images - The files used to create containers
+        \item Docker Hub - A public repository for storing images
+        \item Docker Compose - Useful for multi container environments, most applications will require different services.
+    \end{itemize}
+
+
     \section{Docker commands}
+
     \subsubsection{Docker compose}
+
 
     \section{Jenkins}
 
+
     \section{Kubernetes}
 
+
     \section{Ansible}
-Ansible for now. Need to consider chef and puppet
+    Ansible for now. Need to consider chef and puppet
+
+
     \section{Terraform}
     Cloud stuff here
 
+
     \chapter{JVM Specific / Delete and or separate}
+
+
     \section{Maven}
     Maven stuff or keep separated
+
+
     \section{JVM details}
     Maybe include some low level JVM stuff here....or keep separate
-    \chapter{Hmm maybe more, maybe delete}
-Other tools that can be used via a shell
 
+
+    \chapter{Hmm maybe more, maybe delete}
+    Other tools that can be used via a shell
 
     \paragraph{Code Example}
+
 
     \section{Code Example}
     \begin{lstlisting}[language=Java, caption=Java Code for a Simple Cache]
