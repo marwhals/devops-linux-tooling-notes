@@ -43,26 +43,36 @@
     \tableofcontents
     \newpage
 
+
     \chapter{Linux}
+
+
+    \section{Basic CLI}
+
     Notes on Linux, focus on the stuff beyond the basics.
 
     Everything is a file......
 
     \paragraph{What is a cgroup}
 
-
-    \paragraph{Linux Processes - Ochestration of system operations}
+    \paragraph{Linux Processes - Orchestration of system operations}
     .........?
+
     \paragraph{Package managers}
     ....meh
+
     \paragraph{System boot process and systemd}
+
     \paragraph{Linux processes}
+
     \paragraph{Volumes partitions and mounts} - Managing file systems
+
     \paragraph{Logical volume manager}
+
     \paragraph{SSH}
     hmmmmmmm..........
-    \paragraph{Firewalls, controlling network traffic}
 
+    \paragraph{Firewalls, controlling network traffic}
 
 
     \section{Useful programs}
@@ -71,6 +81,7 @@
 
 
     \section{Notes about the file structure}
+
 
     \section{Bash}
     Reminders on Bash related things.......beyond standard programming constructs....
@@ -81,12 +92,13 @@
     \subsection{Bash Scripting}
     Hmmmmmm useful stuff for scripting
 
+
     \section{Hardening a Linux box}
+
     \subsection{Generally}
     Hardening a linux box
-    \subsection{SELinux}
 
-%\part{The rest}
+    \subsection{SELinux}
 
 
     \chapter{CI/CD stuff}
@@ -125,7 +137,6 @@
     Kernel will isolate a section of the hardrive/physical resource and make it avaiable only to this container.
     This container has access to this very specifc segment of the physical resources.
 
-
     \paragraph{Terminology}
     Docker is an overloaded term.
     Could be referring to Docker client, docker server, docker hub or docker compose.
@@ -163,7 +174,56 @@
     \subsubsection{Docker compose}
 
 
+    \section{Kubernetes}
+
+    \subsubsection{What is Kubernetes?}
+    Clusters - A combination of a master node and multiple nodes.
+    Node - A virtual machine which will run some number of containers, more than likely different.
+    Each virtual machine can run different containers or different images, or different numbers of containers.
+    All these different nodes are managed by the master node. Direction are given to the master node
+    Load balancers are external to the cluster, routing requests.
+
+    Use case, running many differnet containers with different images.
+
+    \subsubsection{Usage}
+    In a development environment use minikube
+    In Prod \textit{managed solutions} are used via Cloud providers.
+    Cloud providers would typically handle the low level details.
+    DIY option does exist.
+
+    Interact with minikube using KubeCtl.
+    Manage the nodes with this tool.
+    Only to be used in a local environment.
+
+    \subsection{Docker compose vs Kubernetes}
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c |}
+            \hline
+            Docker Compose                                                 & Kubernetes                                        \\
+            \hline
+            Each entry can optionally get docker compose to build an image & Kubernetes expects all images to be already built \\
+            Each entry represents a container we want to create            & One config file per object we want to create      \\
+            Each entry defines the networking requirements (ports)         & We have to manually set up all networking         \\
+            \hline
+        \end{tabular}
+        \caption{Sample Table}
+        \label{tab:sample}
+    \end{table}
+
+    Kubernetes expects all docker images to be prebuilt. There is no build pipeline in kubernetst.
+    Expectation is during some outside step these things will be built.
+
+    \subsection{Deployment to a Kubernetes cluster}
+    Make sure image is hosted on docker hub
+    Make one config file to create the container
+    Make one config file to create the container
+
+
+
     \section{Jenkins}
+
     \subsection{Manually using Jenkins}
     Hmmmm......
 
@@ -172,15 +232,17 @@
     \subsection{Jenkins DSL}
     Create jobs using code.
     Requires Jenkins DSL plugin and the Groovy programming language.
+
     \paragraph{Seed Jobs}
     The jobs that creates all the other jobs on the server.
 
     \subsection{Jenkinsfiles}
+
     \paragraph{Pipeline}
     The workflow that is executed when going through the CI/CD process (or any other process).
     Jenkins as code a.k.a pipeline as code. Requires plugin to be installed
 
-\begin{lstlisting}[caption=Jenkinsfile for a CI/CD Pipeline]
+    \begin{lstlisting}[caption=Jenkinsfile for a CI/CD Pipeline]
 pipeline {
     agent any
 
@@ -213,10 +275,21 @@ pipeline {
         }
     }
 }
-\end{lstlisting}
+    \end{lstlisting}
 
 
     \section{Kubernetes}
+
+    \paragraph{What it is}
+    A Master with one or more Nodes.
+    Nodes are either virtual machines or a physical computer.
+    Each of these machines can be used to run a different set of containers.
+    Can be differnt images or different number of containers.
+    These Nodes are managed by a Master node.
+    Master node has a different set of programs running on it which can controdl what the nodes are running at a given time.
+    The cluster is interacted with through the master.
+
+    \paragraph{Why use kubernets} - Running different containers with different images....at scal
 
 
     \section{Ansible}
