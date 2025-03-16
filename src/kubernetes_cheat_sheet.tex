@@ -1,0 +1,169 @@
+%! Author = Marjan
+%! Date = 16/03/2025
+
+% Preamble
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tgheros} % Modern sans-serif font
+\renewcommand{\familydefault}{\sfdefault} % Use sans-serif as default
+
+\definecolor{codegray}{gray}{0.9}
+\lstdefinestyle{kubeStyle}{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false
+}
+
+\title{\textbf{Kubernetes Cheat Sheet}}
+\author{}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section*{Cluster Management}
+    \begin{lstlisting}[style=kubeStyle]
+# View cluster info
+kubectl cluster-info
+
+# View all nodes
+kubectl get nodes
+
+# Describe a node
+kubectl describe node <node_name>
+
+# Get cluster events
+kubectl get events
+
+# View configuration
+kubectl config view
+    \end{lstlisting}
+
+    \section*{Working with Pods}
+    \begin{lstlisting}[style=kubeStyle]
+# List all pods
+kubectl get pods
+
+# Get pods with more details
+kubectl get pods -o wide
+
+# Get detailed pod information
+kubectl describe pod <pod_name>
+
+# Delete a pod
+kubectl delete pod <pod_name>
+
+# Run a temporary pod
+kubectl run mypod --image=nginx --restart=Never
+    \end{lstlisting}
+
+    \section*{Deployments and Services}
+    \begin{lstlisting}[style=kubeStyle]
+# List deployments
+kubectl get deployments
+
+# Create a deployment
+kubectl create deployment my-deployment --image=nginx
+
+# Scale a deployment
+kubectl scale deployment <deployment_name> --replicas=3
+
+# Update a deployment
+kubectl set image deployment/<deployment_name> nginx=nginx:latest
+
+# Rollback a deployment
+kubectl rollout undo deployment/<deployment_name>
+
+# Expose a deployment as a service
+kubectl expose deployment <deployment_name> --type=NodePort --port=80
+    \end{lstlisting}
+
+    \section*{Working with Namespaces}
+    \begin{lstlisting}[style=kubeStyle]
+# List all namespaces
+kubectl get namespaces
+
+# Create a namespace
+kubectl create namespace my-namespace
+
+# Delete a namespace
+kubectl delete namespace my-namespace
+    \end{lstlisting}
+
+    \section*{ConfigMaps and Secrets}
+    \begin{lstlisting}[style=kubeStyle]
+# Create a ConfigMap from a file
+kubectl create configmap my-config --from-file=config.yaml
+
+# View ConfigMaps
+kubectl get configmaps
+
+# Create a Secret from literals
+kubectl create secret generic my-secret --from-literal=username=admin --from-literal=password=secret
+
+# View Secrets
+kubectl get secrets
+    \end{lstlisting}
+
+    \section*{Logs and Debugging}
+    \begin{lstlisting}[style=kubeStyle]
+# View logs of a pod
+kubectl logs <pod_name>
+
+# Stream logs from a pod
+kubectl logs -f <pod_name>
+
+# Get into a running pod
+kubectl exec -it <pod_name> -- /bin/sh
+
+# Debug a pod with a temporary container
+kubectl debug <pod_name> --image=busybox --target=nginx
+    \end{lstlisting}
+
+    \section*{Persistent Volumes}
+    \begin{lstlisting}[style=kubeStyle]
+# List Persistent Volumes (PVs)
+kubectl get pv
+
+# List Persistent Volume Claims (PVCs)
+kubectl get pvc
+
+# Describe a PVC
+kubectl describe pvc <pvc_name>
+    \end{lstlisting}
+
+    \section*{Networking}
+    \begin{lstlisting}[style=kubeStyle]
+# Get all services
+kubectl get services
+
+# Get service details
+kubectl describe service <service_name>
+
+# Get network policies
+kubectl get networkpolicies
+    \end{lstlisting}
+
+    \section*{Helm (Kubernetes Package Manager)}
+    \begin{lstlisting}[style=kubeStyle]
+# Install a Helm chart
+helm install my-release bitnami/nginx
+
+# List installed Helm releases
+helm list
+
+# Upgrade a Helm release
+helm upgrade my-release bitnami/nginx
+
+# Uninstall a Helm release
+helm uninstall my-release
+    \end{lstlisting}
+
+\end{document}

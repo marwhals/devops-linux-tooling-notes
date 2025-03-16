@@ -1,0 +1,116 @@
+%! Author = Marjan
+%! Date = 16/03/2025
+
+% Preamble
+\documentclass[11pt]{article}
+ó
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tgheros} % Modern sans-serif font
+\renewcommand{\familydefault}{\sfdefault} % Use sans-serif as default
+
+\definecolor{codegray}{gray}{0.9}
+\lstdefinestyle{terraformStyle}{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false
+}
+
+\title{\textbf{Terraform Cheat Sheet}}
+\author{}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section*{Initializing and Managing Terraform}
+    \begin{lstlisting}[style=terraformStyle]
+# Initialize Terraform in a directory
+terraform init
+
+# Validate Terraform configuration
+terraform validate
+
+# Format Terraform files
+terraform fmt
+
+# Show execution plan
+terraform plan
+
+# Apply Terraform changes
+terraform apply
+
+# Destroy infrastructure
+terraform destroy
+    \end{lstlisting}
+
+    \section*{Working with State}
+    \begin{lstlisting}[style=terraformStyle]
+# List state resources
+terraform state list
+
+# Show details of a resource in state
+terraform state show <resource>
+
+# Remove a resource from state
+terraform state rm <resource>
+
+# Move resources between states
+terraform state mv <source> <destination>
+
+# Pull remote state
+terraform state pull
+
+# Push local state to remote
+terraform state push
+    \end{lstlisting}
+
+    \section*{Variables and Outputs}
+    \begin{lstlisting}[style=terraformStyle]
+# List output variables
+terraform output
+
+# Show value of an output variable
+terraform output <variable_name>
+
+# Define a variable in CLI
+terraform apply -var="instance_type=t2.micro"
+
+# Use a variables file
+terraform apply -var-file="variables.tfvars"
+    \end{lstlisting}
+
+    \section*{Modules}
+    \begin{lstlisting}[style=terraformStyle]
+# Initialize modules
+terraform get
+
+# Update modules
+terraform get -update
+
+# Define a module in configuration
+module "example" {
+  source = "./modules/example"
+}
+    \end{lstlisting}
+
+    \section*{Providers and Resources}
+    \begin{lstlisting}[style=terraformStyle]
+# Configure a provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Define a resource
+resource "aws_instance" "example" {
+  ami           = "ami-123456"
+  instance_type = "t2.micro"
+}
+    \end{lstlisting}
+
+\end{document}

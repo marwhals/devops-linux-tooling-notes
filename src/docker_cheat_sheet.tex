@@ -1,0 +1,129 @@
+%! Author = Marjan
+%! Date = 16/03/2025
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\renewcommand{\rmdefault}{phv} % Set the default font family to Helvetica
+
+\definecolor{codegray}{gray}{0.9}
+\lstdefinestyle{dockerstyle}{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false
+}
+
+\title{\textbf{Docker Cheat Sheet}}
+\author{}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section*{Docker Basics}
+    \begin{lstlisting}[style=dockerstyle]
+# Check Docker version
+docker --version
+
+# Show system-wide information
+docker info
+
+# List all running containers
+docker ps
+
+# List all containers (including stopped ones)
+docker ps -a
+
+# Start a stopped container
+docker start <container_id>
+
+# Stop a running container
+docker stop <container_id>
+
+# Remove a container
+docker rm <container_id>
+
+# Remove all stopped containers
+docker container prune
+    \end{lstlisting}
+
+    \section*{Working with Images}
+    \begin{lstlisting}[style=dockerstyle]
+# List all downloaded images
+docker images
+
+# Search for an image in Docker Hub
+docker search <image_name>
+
+# Pull an image from Docker Hub
+docker pull <image_name>
+
+# Remove an image
+docker rmi <image_name>
+
+# Remove all unused images
+docker image prune
+    \end{lstlisting}
+
+    \section*{Running Containers}
+    \begin{lstlisting}[style=dockerstyle]
+# Run a container from an image
+docker run <image_name>
+
+# Run a container in detached mode
+docker run -d <image_name>
+
+# Run a container with an interactive shell
+docker run -it <image_name> /bin/bash
+
+# Run a container and remove it after exit
+docker run --rm <image_name>
+    \end{lstlisting}
+
+    \section*{Volumes and Networks}
+    \begin{lstlisting}[style=dockerstyle]
+# List all volumes
+docker volume ls
+
+# Create a volume
+docker volume create <volume_name>
+
+# Remove a volume
+docker volume rm <volume_name>
+
+# List all networks
+docker network ls
+
+# Create a network
+docker network create <network_name>
+
+# Connect a container to a network
+docker network connect <network_name> <container_id>
+    \end{lstlisting}
+
+    \section*{Docker Compose}
+    \begin{lstlisting}[style=dockerstyle]
+# Start services defined in docker-compose.yml
+docker-compose up
+
+# Start services in detached mode
+docker-compose up -d
+
+# Stop services
+docker-compose down
+
+# Restart services
+docker-compose restart
+    \end{lstlisting}
+
+\end{document}

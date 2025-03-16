@@ -1,0 +1,351 @@
+%! Author = Marjan
+%! Date = 16/03/2025
+
+% Preamble
+\documentclass[11pt]{article}
+
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tgheros} % Modern sans-serif font
+\renewcommand{\familydefault}{\sfdefault} % Use sans-serif as default
+
+\definecolor{codegray}{gray}{0.9}
+\lstdefinestyle{linuxStyle}{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false
+}
+
+\title{\textbf{Linux Cheat Sheet}}
+\author{}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \section*{Grep - Searching Text}
+    \begin{lstlisting}[style=linuxStyle]
+# Search for a word in a file
+grep "pattern" file.txt
+
+# Case-insensitive search
+grep -i "pattern" file.txt
+
+# Search recursively in all files of a directory
+grep -r "pattern" /path/to/dir
+
+# Show line numbers in results
+grep -n "pattern" file.txt
+
+# Show only matching part
+grep -o "pattern" file.txt
+
+# Invert search (show lines NOT matching pattern)
+grep -v "pattern" file.txt
+
+# Use extended regex
+grep -E "error|failed" log.txt
+
+# Count occurrences of a pattern
+grep -c "pattern" file.txt
+
+# Highlight matches in color
+grep --color=auto "pattern" file.txt
+
+# Search for whole words only
+grep -w "word" file.txt
+
+# Grep from command output
+ps aux | grep apache
+
+# Find empty lines
+grep "^$" file.txt
+
+# Search multiple patterns
+grep -e "error" -e "warning" log.txt
+    \end{lstlisting}ó
+
+
+    \section*{File & Directory Management}
+    \begin{lstlisting}[style=linuxStyle]
+# List files (detailed, hidden)
+ls -lah
+
+# Change directory
+cd /path/to/directory
+
+# Create a new directory
+mkdir mydir
+
+# Remove a file/directory
+rm file.txt
+rm -r mydir
+
+# Copy files/directories
+cp file1.txt file2.txt
+cp -r dir1 dir2
+
+# Move/rename files
+mv oldname.txt newname.txt
+mv file.txt /new/path/
+
+# Show file contents
+cat file.txt
+less file.txt
+
+# Create empty files
+touch file.txt
+
+# Find files
+find /path -name "file.txt"
+locate file.txt
+    \end{lstlisting}
+
+    \section*{Permissions & Ownership}
+    \begin{lstlisting}[style=linuxStyle]
+# Change file permissions (read, write, execute)
+chmod 755 file.sh
+
+# Change ownership
+chown user:group file.txt
+
+# Change file attributes
+chattr +i file.txt   # Make file immutable
+lsattr file.txt      # Show attributes
+    \end{lstlisting}
+
+    \section*{Process Management}
+    \begin{lstlisting}[style=linuxStyle]
+# List running processes
+ps aux
+top
+htop  # Interactive process manager
+
+# Kill a process
+kill <PID>
+kill -9 <PID>  # Force kill
+
+# Background/Foreground jobs
+command &    # Run in background
+jobs         # List background jobs
+fg %1        # Bring job 1 to foreground
+bg %1        # Resume job 1 in background
+
+# Monitor processes
+watch -n 1 "ps aux | grep myprocess"
+    \end{lstlisting}
+
+    \section*{Networking Commands}
+    \begin{lstlisting}[style=linuxStyle]
+# Show IP addresses
+ip a
+ifconfig (deprecated)
+
+# Show active connections
+netstat -tulnp
+ss -tulnp
+
+# Ping a server
+ping google.com
+
+# Check open ports
+nmap localhost
+
+# Download files
+wget http://example.com/file.zip
+curl -O http://example.com/file.zip
+
+# Test network speed
+speedtest-cli
+
+# Check DNS resolution
+nslookup google.com
+dig google.com
+    \end{lstlisting}
+
+    \section*{User Management}
+    \begin{lstlisting}[style=linuxStyle]
+# Add a new user
+useradd -m -s /bin/bash newuser
+passwd newuser
+
+# Delete a user
+userdel -r newuser
+
+# List users
+cat /etc/passwd
+
+# Add a user to a group
+usermod -aG sudo newuser
+
+# Switch users
+su - newuser
+    \end{lstlisting}
+
+    \section*{Disk & Storage Management}
+    \begin{lstlisting}[style=linuxStyle]
+# Show disk usage
+df -h
+du -sh /path/to/directory
+
+# List mounted drives
+lsblk
+mount | column -t
+
+# Mount/Unmount a drive
+mount /dev/sdb1 /mnt/usb
+umount /mnt/usb
+
+# Check disk health
+fsck /dev/sda
+smartctl -a /dev/sda
+    \end{lstlisting}
+
+    \section*{System Monitoring}
+    \begin{lstlisting}[style=linuxStyle]
+# Show system uptime
+uptime
+
+# Show memory usage
+free -h
+
+# Show CPU info
+lscpu
+
+# Show system logs
+journalctl -xe
+tail -f /var/log/syslog
+    \end{lstlisting}
+
+    \section*{Package Management}
+    \subsection*{Debian-based (Ubuntu, Debian)}
+    \begin{lstlisting}[style=linuxStyle]
+# Update package list
+sudo apt update
+
+# Upgrade packages
+sudo apt upgrade
+
+# Install a package
+sudo apt install package-name
+
+# Remove a package
+sudo apt remove package-name
+
+# Clean unused packages
+sudo apt autoremove
+    \end{lstlisting}
+
+    \subsection*{RHEL-based (CentOS, Fedora)}
+    \begin{lstlisting}[style=linuxStyle]
+# Install a package
+sudo yum install package-name
+
+# Remove a package
+sudo yum remove package-name
+    \end{lstlisting}
+
+    \subsection*{Arch-based (Manjaro, Arch)}
+    \begin{lstlisting}[style=linuxStyle]
+# Install a package
+sudo pacman -S package-name
+
+# Remove a package
+sudo pacman -R package-name
+    \end{lstlisting}
+
+    \section*{SSH & Remote Access}
+    \begin{lstlisting}[style=linuxStyle]
+# Connect to a remote server
+ssh user@remote_host
+
+# Copy files to/from remote server
+scp file.txt user@remote_host:/path/
+scp user@remote_host:/path/file.txt .
+
+# Transfer files with rsync
+rsync -avz file.txt user@remote_host:/path/
+    \end{lstlisting}
+
+    \section*{Archiving & Compression}
+    \begin{lstlisting}[style=linuxStyle]
+# Create a tar archive
+tar -cvf archive.tar mydir/
+
+# Extract a tar archive
+tar -xvf archive.tar
+
+# Create a compressed archive
+tar -czvf archive.tar.gz mydir/
+
+# Extract a compressed archive
+tar -xzvf archive.tar.gz
+
+# Compress a file
+gzip file.txt
+bzip2 file.txt
+
+# Decompress a file
+gunzip file.txt.gz
+bunzip2 file.txt.bz2
+    \end{lstlisting}
+
+    \section*{Shell Scripting Basics}
+    \begin{lstlisting}[style=linuxStyle]
+#!/bin/bash
+echo "Hello, World!"
+
+# Variables
+name="Linux"
+echo "Welcome to $name!"
+
+# Loops
+for i in {1..5}; do
+  echo "Loop $i"
+done
+
+# Conditionals
+if [ -f "file.txt" ]; then
+  echo "File exists"
+else
+  echo "File does not exist"
+fi
+
+# Read user input
+read -p "Enter your name: " user
+echo "Hello, $user!"
+    \end{lstlisting}
+
+    \section*{Crontab (Scheduled Jobs)}
+    \begin{lstlisting}[style=linuxStyle]
+# List scheduled jobs
+crontab -l
+
+# Edit crontab
+crontab -e
+
+# Run a script every day at 2 AM
+0 2 * * * /path/to/script.sh
+    \end{lstlisting}
+
+    \section*{System Information}
+    \begin{lstlisting}[style=linuxStyle]
+# Show Linux distribution
+lsb_release -a
+
+# Kernel version
+uname -r
+
+# List hardware info
+lshw
+
+# Show environment variables
+env
+    \end{lstlisting}
+
+\end{document}

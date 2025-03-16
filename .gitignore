@@ -30,7 +30,7 @@
 *.swo
 
 # LaTeX intermediate and output files
-*.pdf
+#*.pdf ----
 *.ps
 *.dvi
 *.xdv

@@ -1,0 +1,133 @@
+%! Author = Marjan
+%! Date = 16/03/2025
+
+% Preamble
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tgheros} % Modern sans-serif font
+\renewcommand{\familydefault}{\sfdefault} % Use sans-serif as default
+
+\definecolor{codegray}{gray}{0.9}
+\lstdefinestyle{jenkinsStyle}{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false
+}
+
+\title{\textbf{Jenkins Cheat Sheet}}
+\author{}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section*{Jenkins CLI Commands}
+    \begin{lstlisting}[style=jenkinsStyle]
+# List installed plugins
+java -jar jenkins-cli.jar -s http://localhost:8080 list-plugins
+
+# Start a Jenkins job
+java -jar jenkins-cli.jar -s http://localhost:8080 build my-job
+
+# Get Jenkins system info
+java -jar jenkins-cli.jar -s http://localhost:8080 system-info
+
+# Restart Jenkins
+java -jar jenkins-cli.jar -s http://localhost:8080 restart
+    \end{lstlisting}
+
+    \section*{Pipeline Syntax (Declarative)}
+    \begin{lstlisting}[style=jenkinsStyle]
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploying...'
+            }
+        }
+    }
+}
+    \end{lstlisting}
+
+    \section*{Pipeline Syntax (Scripted)}
+    \begin{lstlisting}[style=jenkinsStyle]
+node {
+    stage('Build') {
+        sh 'echo Building...'
+    }
+    stage('Test') {
+        sh 'echo Testing...'
+    }
+    stage('Deploy') {
+        sh 'echo Deploying...'
+    }
+}
+    \end{lstlisting}
+
+    \section*{Managing Jenkins Jobs}
+    \begin{lstlisting}[style=jenkinsStyle]
+# List all Jenkins jobs
+java -jar jenkins-cli.jar -s http://localhost:8080 list-jobs
+
+# Delete a job
+java -jar jenkins-cli.jar -s http://localhost:8080 delete-job my-job
+
+# Copy a job
+java -jar jenkins-cli.jar -s http://localhost:8080 copy-job old-job new-job
+
+# Create a job from XML
+java -jar jenkins-cli.jar -s http://localhost:8080 create-job my-job < config.xml
+    \end{lstlisting}
+
+    \section*{Working with Plugins}
+    \begin{lstlisting}[style=jenkinsStyle]
+# Install a plugin
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
+
+# Uninstall a plugin
+java -jar jenkins-cli.jar -s http://localhost:8080 uninstall-plugin git
+
+# List available plugins
+java -jar jenkins-cli.jar -s http://localhost:8080 list-plugins | grep available
+    \end{lstlisting}
+
+    \section*{User Management}
+    \begin{lstlisting}[style=jenkinsStyle]
+# Create a user
+java -jar jenkins-cli.jar -s http://localhost:8080 create-user --username admin --password secret
+
+# List users
+java -jar jenkins-cli.jar -s http://localhost:8080 list-users
+
+# Delete a user
+java -jar jenkins-cli.jar -s http://localhost:8080 delete-user admin
+    \end{lstlisting}
+
+    \section*{Jenkins System Configuration}
+    \begin{lstlisting}[style=jenkinsStyle]
+# Reload configuration
+java -jar jenkins-cli.jar -s http://localhost:8080 reload-configuration
+
+# Backup Jenkins configuration
+tar -czvf jenkins-backup.tar.gz /var/lib/jenkins
+    \end{lstlisting}
+
+\end{document}
