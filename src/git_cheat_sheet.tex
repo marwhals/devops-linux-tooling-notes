@@ -1,0 +1,223 @@
+%! Author = Marjan
+%! Date = 16/03/2025
+
+% Preamble
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tgheros} % Modern sans-serif font
+\renewcommand{\familydefault}{\sfdefault} % Use sans-serif as default
+
+\definecolor{codegray}{gray}{0.9}
+\lstdefinestyle{gitStyle}{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false
+}
+
+\title{\textbf{Comprehensive A-Z Git Cheat Sheet}}
+\author{}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section*{Setup & Configuration}
+    \begin{lstlisting}[style=gitStyle]
+# Set global username and email
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# Set default editor
+git config --global core.editor "vim"
+
+# Check Git configuration
+git config --list
+
+# Set up a global .gitignore
+git config --global core.excludesfile ~/.gitignore_global
+    \end{lstlisting}
+
+    \section*{Initializing & Cloning}
+    \begin{lstlisting}[style=gitStyle]
+# Initialize a new Git repository
+git init
+
+# Clone an existing repository
+git clone https://github.com/user/repo.git
+
+# Clone a repo with a specific branch
+git clone -b branch-name https://github.com/user/repo.git
+    \end{lstlisting}
+
+    \section*{Basic Workflow}
+    \begin{lstlisting}[style=gitStyle]
+# Check the status of the repository
+git status
+
+# Add files to staging area
+git add file.txt
+git add .  # Add all changes
+
+# Commit changes
+git commit -m "Your commit message"
+
+# Amend the last commit (without changing the message)
+git commit --amend --no-edit
+
+# View commit history
+git log --oneline --graph --all
+    \end{lstlisting}
+
+    \section*{Branching & Merging}
+    \begin{lstlisting}[style=gitStyle]
+# List branches
+git branch
+
+# Create a new branch
+git branch new-branch
+
+# Switch to a branch
+git checkout new-branch
+
+# Create and switch to a new branch
+git checkout -b new-branch
+
+# Merge a branch into the current branch
+git merge branch-name
+
+# Delete a branch (local)
+git branch -d branch-name
+
+# Delete a branch (remote)
+git push origin --delete branch-name
+    \end{lstlisting}
+
+    \section*{Rebasing}
+    \begin{lstlisting}[style=gitStyle]
+# Rebase the current branch onto another
+git rebase branch-name
+
+# Abort an ongoing rebase
+git rebase --abort
+
+# Continue a rebase after resolving conflicts
+git rebase --continue
+    \end{lstlisting}
+
+    \section*{Remote Repositories}
+    \begin{lstlisting}[style=gitStyle]
+# View remote repositories
+git remote -v
+
+# Add a remote repository
+git remote add origin https://github.com/user/repo.git
+
+# Change remote repository URL
+git remote set-url origin https://github.com/new/repo.git
+
+# Push changes to remote repository
+git push origin main
+
+# Pull changes from remote repository
+git pull origin main
+    \end{lstlisting}
+
+    \section*{Tagging}
+    \begin{lstlisting}[style=gitStyle]
+# Create a lightweight tag
+git tag v1.0.0
+
+# Create an annotated tag
+git tag -a v1.0.0 -m "Version 1.0.0"
+
+# List all tags
+git tag
+
+# Push a tag to the remote repository
+git push origin v1.0.0
+    \end{lstlisting}
+
+    \section*{Undoing Changes}
+    \begin{lstlisting}[style=gitStyle]
+# Unstage a file (remove from staging area)
+git reset HEAD file.txt
+
+# Revert to a previous commit
+git checkout commit-hash file.txt
+
+# Reset to the previous commit (keep changes unstaged)
+git reset --soft HEAD~1
+
+# Reset to the previous commit (discard changes)
+git reset --hard HEAD~1
+
+# Revert a commit (creates a new commit that undoes changes)
+git revert commit-hash
+    \end{lstlisting}
+
+    \section*{Stashing Changes}
+    \begin{lstlisting}[style=gitStyle]
+# Stash uncommitted changes
+git stash
+
+# List all stashes
+git stash list
+
+# Apply the last stashed changes
+git stash pop
+
+# Apply a specific stash
+git stash apply stash@{2}
+
+# Drop a specific stash
+git stash drop stash@{2}
+
+# Clear all stashes
+git stash clear
+    \end{lstlisting}
+
+    \section*{Cherry-Picking}
+    \begin{lstlisting}[style=gitStyle]
+# Apply a specific commit from another branch
+git cherry-pick commit-hash
+    \end{lstlisting}
+
+    \section*{Git Hooks (Automation)}
+    \begin{lstlisting}[style=gitStyle]
+# List available hooks
+ls .git/hooks
+
+# Enable a pre-commit hook
+cp pre-commit.sample .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+    \end{lstlisting}
+
+    \section*{Submodules}
+    \begin{lstlisting}[style=gitStyle]
+# Add a submodule
+git submodule add https://github.com/user/repo.git path/to/submodule
+
+# Initialize and update submodules
+git submodule update --init --recursive
+
+# Remove a submodule
+git submodule deinit -f path/to/submodule
+rm -rf path/to/submodule
+    \end{lstlisting}
+
+    \section*{Git Aliases}
+    \begin{lstlisting}[style=gitStyle]
+# Set a Git alias
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.st status
+    \end{lstlisting}
+
+\end{document}
